@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/newsScraper");
+mongoose.connect("mongodb://heroku_wxk9kc0r:ogepv4lm5f3sdc1ol3fdd2l1js@ds139470.mlab.com:39470/heroku_wxk9kc0r");
 var db = mongoose.connection;
 
 db.on("error", function (error) {
@@ -76,14 +76,14 @@ app.get("/", function (req, res) {
 });
 
 app.get("/articles/:id", function (req, res) {
-    Article.findOne({ "_id": req.params.id })
+    Article.find({ "_id": req.params.id })
         .populate("note")
         .exec(function (error, doc) {
             if (error) {
                 console.log(error);
             }
             else {
-                res.json(doc);
+                res.json(doc[0]);
             }
         });
 });
@@ -138,7 +138,7 @@ app.get("/saved", function (req, res) {
 app.put("/saved/:id", function (req, res) {
     console.log(req.body)
     console.log(req.params.id)
-    Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": req.body })
+    Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": req.body.saved })
         .exec(function (err, doc) {
             if (err) {
                 console.log(err);

@@ -1,7 +1,7 @@
 {{#each article}}
 {{#if this.saved}}
 <div class="well">
-    <h2>{{this.title}}</h2>
+    <h2>{{this.title}} {{this.note.body}}</h2>
     {{!--<form method="get" action="/articles/{{this._id}}">--}}
         <button class="btn btn-success" data-toggle="modal" data-target="#myModal">Add Note</button>
     {{!--</form>--}}
@@ -20,14 +20,12 @@
                 <h4 class="modal-title">Leave Note for {{this.title}}</h4>
             </div>
             <div class="modal-body">
-                {{#each note}}
                 <div class="well">
-                    <p>{{this.body}}</p>
+                    <p>{{this.note.body}}</p>
                      <form class="navbar-form navbar-left" method="POST" action="/articles/{{this._id}}?_method=DELETE">
                         <button class="btn btn-danger">X</button>
                     </form>
                 </div>
-                {{/each}}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
