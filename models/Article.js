@@ -10,12 +10,16 @@ var ArticleSchema = new Schema({
         type: String,
         required: true
     },
+    saved: {
+        type: Boolean,
+        default: false
+    },
     note: {
-        Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "Note"
     }
 });
 
-var Article = mongoose.model("ArticleSchema");
+var Article = mongoose.model("Article", ArticleSchema);
 
 module.exports = Article;

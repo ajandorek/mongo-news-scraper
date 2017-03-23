@@ -1,0 +1,9 @@
+{{#each article}}
+    <div class="well">
+        <h2>{{this.title}}</h2>
+        <form action="/saved/{{this._id}}?_method=PUT" method="POST">
+            <input type="hidden" name="saved" value="true">
+            <button type="submit" class="btn btn-success">Save Article</button>
+        </form>
+    </div>
+{{/each}}
